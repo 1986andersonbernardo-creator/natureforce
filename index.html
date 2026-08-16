@@ -35,18 +35,22 @@
       </a>
 
       <nav class="main-nav" id="mainNav" aria-label="Navegação principal">
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
+          <li class="nav-close-item">
+            <button class="menu-close" id="menuClose" aria-label="Fechar menu">
+              <i data-lucide="x"></i>
+            </button>
+          </li>
           <li><a href="#inicio" class="nav-link">Início</a></li>
           <li><a href="#simulador" class="nav-link">Simulador</a></li>
           <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li class="nav-cta-item">
+            <a href="#simulador" class="btn btn-primary nav-cta">Simular economia</a>
+          </li>
         </ul>
-        <a href="#simulador" class="btn btn-primary nav-cta">Simular economia</a>
-        <button class="menu-close" id="menuClose" aria-label="Fechar menu">
-          <i data-lucide="x"></i>
-        </button>
       </nav>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
         <i data-lucide="menu"></i>
       </button>
     </div>

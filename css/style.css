@@ -1459,8 +1459,22 @@ summary:focus-visible {
 }
 
 @media (max-width: 980px) {
+  /* Causa raiz corrigida: main-nav permanece position:fixed e
+     visibility/pointer-events controlam o estado, sem display:none */
   .main-nav {
-    display: none;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1040;
+    transition: visibility 0s 0.35s;
+  }
+
+  .main-nav.open {
+    visibility: visible;
+    pointer-events: auto;
+    transition: visibility 0s 0s;
   }
 
   .menu-toggle {
@@ -1468,23 +1482,25 @@ summary:focus-visible {
   }
 
   .nav-links {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
-    height: 100vh;
-    width: 280px;
+    height: 100dvh;
+    width: min(320px, 85vw);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background: var(--color-white);
     box-shadow: -12px 0 24px rgba(0, 0, 0, 0.08);
-    padding: 80px 28px 28px;
-    gap: 16px;
+    padding: 24px 20px;
+    gap: 8px;
     transform: translateX(100%);
-    transition: var(--transition-base);
-    z-index: 1020;
+    transition: transform 0.35s var(--easing);
+    z-index: 2;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .nav-links.open {
+  .main-nav.open .nav-links {
     transform: translateX(0);
   }
 
@@ -1492,17 +1508,34 @@ summary:focus-visible {
     width: 100%;
   }
 
+  .nav-close-item {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+
   .nav-links a {
     display: block;
     width: 100%;
-    padding: 13px 22px;
-    border-radius: var(--radius-lg);
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
     font-weight: 500;
+    font-size: 0.95rem;
     color: var(--color-brand-dark);
+    transition: var(--transition-fast);
   }
 
   .nav-links a:hover {
     background: rgba(30, 169, 106, 0.04);
+    padding-left: 22px;
+  }
+
+  .nav-cta-item {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-gray-100);
   }
 
   .nav-cta {
@@ -1512,9 +1545,10 @@ summary:focus-visible {
 
   .menu-close {
     display: inline-flex;
-    position: absolute;
-    top: 24px;
-    right: 24px;
+    width: 40px;
+    height: 40px;
+    background: var(--color-gray-100);
+    color: var(--color-brand-dark);
   }
 
   .hero {
@@ -1664,11 +1698,6 @@ summary:focus-visible {
 
   .faq-answer {
     padding: 0 18px 18px;
-  }
-
-  .nav-links {
-    padding: 60px 20px 20px;
-    width: 260px;
   }
 }
 

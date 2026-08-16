@@ -49,40 +49,72 @@ document.addEventListener('DOMContentLoaded', function() {
     updateHeader();
   }
 
-  /* ========== MOBILE MENU ========== */
+  /* ========== MOBILE MENU (causa raiz corrigida) ==========
+     Arquitetura: .main-nav é o container fixed (visibility/pointer-events)
+     O body NUNCA recebe overflow:hidden — o menu possui scroll próprio.
+     Fechar restaura imediatamente todos os estados. */
   function initMobileMenu() {
-    if (!menuToggle || !menuClose) return;
-
     var mainNav = document.querySelector('.main-nav');
-    if (!mainNav) return;
+    if (!menuToggle || !mainNav) return;
 
-    menuToggle.addEventListener('click', function() {
+    function openMenu() {
       mainNav.classList.add('open');
       menuToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    });
+      // Foca o botão fechar para acessibilidade
+      if (menuClose) {
+        menuClose.focus({ preventScroll: true });
+      }
+    }
 
-    menuClose.addEventListener('click', function() {
+    function closeMenu() {
       mainNav.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      // Nenhum overflow/position/estado residual — página rola imediatamente
+    }
+
+    // Abrir/fechar (toggle)
+    menuToggle.addEventListener('click', function() {
+      if (mainNav.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
-    var navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        mainNav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+    // Fechar (botão X)
+    if (menuClose) {
+      menuClose.addEventListener('click', function() {
+        closeMenu();
       });
+    }
+
+    // Fechar ao clicar em qualquer link interno (delegação)
+    mainNav.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (link && mainNav.contains(link)) {
+        closeMenu();
+      }
+    });
+
+    // Fechar ao tocar fora do painel (área escura do container fixed)
+    mainNav.addEventListener('click', function(e) {
+      if (e.target === mainNav) {
+        closeMenu();
+      }
     });
 
     // Fechar com tecla ESC
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && mainNav.classList.contains('open')) {
-        mainNav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        closeMenu();
+        menuToggle.focus({ preventScroll: true });
+      }
+    });
+
+    // Fechar ao redimensionar para desktop (evita estado órfão)
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 980 && mainNav.classList.contains('open')) {
+        closeMenu();
       }
     });
   }
