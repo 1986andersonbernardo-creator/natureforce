@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nature Force | Energia Solar por Assinatura</title>
+  <meta name="description" content="Economize até 20% na sua conta de energia com energia solar por assinatura. Sem placas, sem obras, sem fidelidade. Simule agora." />
+  <meta name="theme-color" content="#0b5b3c" />
+  <link rel="canonical" href="https://www.natureforce.com.br/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nature Force | Energia Solar por Assinatura" />
+  <meta property="og:description" content="Economize até 20% na sua conta de energia. Sem placas, sem obras, sem fidelidade." />
+  <meta property="og:image" content="img/logo.png" />
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="icon" type="image/png" href="img/fav.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-bar">
+      <a href="#inicio" class="logo" aria-label="Nature Force — início">
+        <img src="img/logo.png" alt="Nature Force" class="logo-img" />
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegação principal">
+        <ul class="nav-links">
+          <li><a href="#inicio" class="nav-link">Início</a></li>
+          <li><a href="#simulador" class="nav-link">Simulador</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+        <a href="#simulador" class="btn btn-primary nav-cta">Simular economia</a>
+        <button class="menu-close" id="menuClose" aria-label="Fechar menu">
+          <i data-lucide="x"></i>
+        </button>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO (compacto) ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero-bg" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1920&q=80"
+          alt=""
+          class="hero-bg-img" />
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+
+      <div class="container hero-content">
+        <h1 class="reveal-on-load">
+          Desconto na conta de energia <span class="text-accent">sem investimentos.</span>
+        </h1>
+
+        <p class="reveal-on-load">
+          Energia limpa gerada em usinas solares, injetada na rede e convertida em economia real para você.
+        </p>
+
+        <div class="hero-actions reveal-on-load">
+          <a href="#simulador" class="btn btn-primary btn-arrow btn-lg">
+            <span>Simular economia</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="hero-stats reveal-on-load">
+          <div class="hero-stat">
+            <span class="hero-stat-value">Até 20%</span>
+            <span class="hero-stat-label">de economia</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">0</span>
+            <span class="hero-stat-label">placas no telhado</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">100%</span>
+            <span class="hero-stat-label">digital</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SIMULADOR (centro da experiência) ============ -->
+    <section class="simulator" id="simulador">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Simulador</span>
+          <h2>Descubra sua economia em 30 segundos</h2>
+          <p>Preencha o valor da sua conta de luz e veja quanto você pode economizar.</p>
+        </div>
+
+        <div class="sim-wrap reveal">
+          <div class="sim-card" id="simCard">
+            <!-- Progresso -->
+            <div class="sim-progress" id="simProgress">
+              <div class="sim-progress-bar" id="simProgressBar"></div>
+              <div class="sim-progress-steps">
+                <span class="sim-progress-step active" data-step="1">1</span>
+                <span class="sim-progress-step" data-step="2">2</span>
+                <span class="sim-progress-step" data-step="3">3</span>
+              </div>
+            </div>
+
+            <!-- Etapa 1: Valor da conta -->
+            <div class="sim-step active" id="simStep1" data-step="1">
+              <div class="sim-step-head">
+                <span class="sim-step-icon"><i data-lucide="receipt"></i></span>
+                <h3>Qual o valor médio da sua conta de energia?</h3>
+                <p>Verifique o valor na sua conta de luz dos últimos meses.</p>
+              </div>
+
+              <label class="sim-label-input" for="contaValor">Valor médio mensal</label>
+              <div class="sim-input">
+                <span class="sim-currency">R$</span>
+                <input type="text" id="contaValor" inputmode="numeric" placeholder="500" autocomplete="off" />
+              </div>
+
+              <div class="sim-chips" id="simChips" aria-label="Valores rápidos">
+                <button type="button" class="chip" data-value="200">R$ 200</button>
+                <button type="button" class="chip active" data-value="500">R$ 500</button>
+                <button type="button" class="chip" data-value="800">R$ 800</button>
+                <button type="button" class="chip" data-value="1200">R$ 1.200</button>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-block btn-arrow sim-next" data-next="2">
+                <span>Continuar</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+
+            <!-- Etapa 2: Tipo de imóvel -->
+            <div class="sim-step" id="simStep2" data-step="2">
+              <div class="sim-step-head">
+                <span class="sim-step-icon"><i data-lucide="building-2"></i></span>
+                <h3>Qual o tipo do seu imóvel?</h3>
+                <p>Isso nos ajuda a estimar seu potencial de economia.</p>
+              </div>
+
+              <div class="sim-options" id="simTipoImovel">
+                <button type="button" class="sim-option active" data-value="residencial">
+                  <i data-lucide="home"></i>
+                  <span>Residencial</span>
+                </button>
+                <button type="button" class="sim-option" data-value="comercial">
+                  <i data-lucide="store"></i>
+                  <span>Comercial</span>
+                </button>
+                <button type="button" class="sim-option" data-value="industrial">
+                  <i data-lucide="factory"></i>
+                  <span>Industrial</span>
+                </button>
+              </div>
+
+              <div class="sim-nav-buttons">
+                <button type="button" class="btn btn-secondary btn-arrow sim-back" data-prev="1">
+                  <i data-lucide="arrow-left"></i>
+                  <span>Voltar</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-arrow sim-next" data-next="3">
+                  <span>Continuar</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Etapa 3: Resultado -->
+            <div class="sim-step" id="simStep3" data-step="3">
+              <div class="sim-result-head">
+                <span class="sim-result-icon"><i data-lucide="sparkles"></i></span>
+                <h3>Seu potencial de economia</h3>
+              </div>
+
+              <div class="sim-result-hero">
+                <span class="sim-result-label">Economia estimada por mês</span>
+                <span class="sim-result-value" id="economiaMes">R$ 0</span>
+                <span class="sim-result-badge" id="economiaPercentual">Até 20% de desconto</span>
+              </div>
+
+              <div class="sim-result-grid">
+                <div class="sim-result-item">
+                  <span class="sim-label">Economia anual</span>
+                  <span class="sim-value" id="economiaAno">R$ 0</span>
+                </div>
+                <div class="sim-result-item">
+                  <span class="sim-label">Valor estimado da conta</span>
+                  <span class="sim-value" id="valorEstimado">R$ 0</span>
+                </div>
+              </div>
+
+              <div class="sim-chart" aria-hidden="true">
+                <div class="chart-bars">
+                  <div class="chart-col">
+                    <span class="chart-bar chart-current" id="chartCurrent" style="height: 100%"></span>
+                    <span class="chart-label">Conta atual</span>
+                  </div>
+                  <div class="chart-col">
+                    <span class="chart-bar chart-discounted" id="chartDiscounted" style="height: 80%"></span>
+                    <span class="chart-label">Com Nature Force</span>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#" class="btn btn-primary btn-block btn-arrow btn-lg" id="simCta">
+                <span>Quero economizar</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+
+              <button type="button" class="sim-restart" id="simRestart">
+                <i data-lucide="rotate-ccw"></i>
+                Refazer simulação
+              </button>
+
+              <p class="sim-note" id="simAviso">
+                Simulação estimativa. O desconto e a elegibilidade podem variar conforme região, distribuidora, modalidade e condições aplicáveis.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INFO ROW (benefícios + como funciona integrados) ============ -->
+    <section class="info-row">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-col reveal">
+            <span class="eyebrow">Por que Nature Force</span>
+            <h2>Economia real, sem complicação</h2>
+            <p class="info-intro">
+              A energia é gerada em usinas próprias e os créditos são abatidos direto na sua conta.
+            </p>
+
+            <ul class="benefit-list">
+              <li>
+                <span class="benefit-icon"><i data-lucide="trending-up"></i></span>
+                <div>
+                  <strong>Até 20% de economia</strong>
+                  <p>Desconto direto na sua conta todos os meses.</p>
+                </div>
+              </li>
+              <li>
+                <span class="benefit-icon"><i data-lucide="home"></i></span>
+                <div>
+                  <strong>Sem instalação</strong>
+                  <p>Nada de placas, obras ou manutenção no seu imóvel.</p>
+                </div>
+              </li>
+              <li>
+                <span class="benefit-icon"><i data-lucide="lock-open"></i></span>
+                <div>
+                  <strong>Sem fidelidade</strong>
+                  <p>Liberdade para cancelar conforme as condições contratuais.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="info-col reveal d2">
+            <span class="eyebrow">Como funciona</span>
+            <h2>Simples como pagar a conta</h2>
+            <p class="info-intro">
+              Do sol à sua conta de luz em 4 passos.
+            </p>
+
+            <ol class="steps-list">
+              <li>
+                <span class="step-number">01</span>
+                <div>
+                  <strong>Geramos energia solar</strong>
+                  <p>Em usinas próprias e 100% renováveis.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">02</span>
+                <div>
+                  <strong>Injetamos na rede</strong>
+                  <p>A distribuidora da sua região recebe a energia.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">03</span>
+                <div>
+                  <strong>Você recebe os créditos</strong>
+                  <p>Abatimento aplicado direto na sua conta de luz.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">04</span>
+                <div>
+                  <strong>Economia todo mês</strong>
+                  <p>Desconto recorrente, sem precisar fazer nada.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <p class="info-note reveal">
+          <i data-lucide="leaf"></i>
+          Energia 100% renovável. Consulte regras e condições para cada estado.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Perguntas frequentes</h2>
+          <p>Tire suas dúvidas sobre energia solar por assinatura.</p>
+        </div>
+
+        <div class="faq-list reveal">
+          <details class="faq-item">
+            <summary>
+              <span>Como funciona a energia solar por assinatura?</span>
+              <i data-lucide="chevron-down"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                A Nature Force gera energia solar em usinas próprias e injeta essa energia na rede da distribuidora. Você recebe créditos de energia que são abatidos da sua conta de luz, gerando economia todos os meses.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Preciso instalar placas solares?</span>
+              <i data-lucide="chevron-down"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Não! Você não precisa instalar nada. A energia é gerada nas usinas da Nature Force e entregue pela rede elétrica da sua distribuidora.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Quanto posso economizar?</span>
+              <i data-lucide="chevron-down"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                A economia pode chegar a até 20% do valor da sua conta de energia, dependendo da sua região, distribuidora e condições aplicáveis.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Existe fidelidade ou contrato de longo prazo?</span>
+              <i data-lucide="chevron-down"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Não. Você tem liberdade para cancelar conforme as condições contratuais, sem burocracia.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>Como faço para aderir?</span>
+              <i data-lucide="chevron-down"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                O processo é 100% digital. Faça uma simulação, fale com um especialista e nós cuidamos de todo o processo para você.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#inicio" class="logo logo-dark" aria-label="Nature Force — voltar ao início">
+            <img src="img/logo.png" alt="Nature Force" class="footer-logo-img" />
+          </a>
+          <p>A energia solar que cabe no seu bolso. Sem placas, sem obras e sem fidelidade.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#simulador">Simulador</a></li>
+              <li><a href="#faq">Perguntas frequentes</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col footer-contact">
+            <h4>Contato</h4>
+            <ul>
+              <li>
+                <i data-lucide="phone"></i>
+                <span>(81) 98660-0664</span>
+              </li>
+              <li>
+                <i data-lucide="mail"></i>
+                <span>natureforceenergiasolar@gmail.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">2026</span> Nature Force. Todos os direitos reservados.</p>
+        <div class="footer-legal">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="#" target="_blank" rel="noopener" class="float-whatsapp" id="floatWhatsApp" aria-label="Falar com a Nature Force no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07a8.1 8.1 0 0 1-2.39-1.47 8.96 8.96 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.19.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.11.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.34zM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 7 9.9 9.9 0 0 1-9.89 9.87zM20.51 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.59 5.94L.06 24l6.31-1.65a11.87 11.87 0 0 0 5.68 1.44h.01c6.54 0 11.89-5.33 11.89-11.88 0-3.18-1.24-6.16-3.44-8.42z"/></svg>
+    <span>Falar com especialista</span>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
