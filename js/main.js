@@ -394,46 +394,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  /* ========== VÍDEO NATURE FORCE (loop contínuo) ==========
-     Reproduz img/vid.mp4 e img/vid1.mp4 em loop alternado.
-     O MP4 só é carregado quando o usuário clica no play. */
+  /* ========== VÍDEO NATURE FORCE (play automático, sem áudio) ==========
+     Reproduz img/vid.mp4 e img/vid1.mp4 com play automático e sem áudio.
+     O vídeo carrega apenas uma vez e permanece na tela em loop.
+     Arquivos em /img/ */
   function initVideo() {
     var posterBtn = document.getElementById('nfVideoPoster');
     var videoWrap = document.getElementById('nfVideo');
     if (!posterBtn || !videoWrap) return;
 
-    var VIDEOS = ['img/vid.mp4', 'img/vid1.mp4'];
-    var currentIndex = 0;
+    // Define a fonte dos vídeos (informe os nomes dos seus arquivos em /img/)
+    var VIDEO_SRC = 'img/vid.mp4'; // ← primeiro vídeo
+    var VIDEO_SRC2 = 'img/vid1.mp4'; // ← segundo vídeo (opcional)
 
     posterBtn.addEventListener('click', function() {
       if (videoWrap.querySelector('video')) return;
 
       // Cria o <video> dinamicamente (performance: carrega só no clique)
       var video = document.createElement('video');
-      video.controls = true;
+      video.autoplay = true;
+      video.muted = true; // O autoplay requer muted em navegadores modernos
       video.playsInline = true;
-      video.loop = false; // playlist manual (alterna entre os dois vídeos)
-      video.preload = 'auto';
+      video.loop = true; // loop contínuo do vídeo atual
+      video.preload = 'metadata';
       video.setAttribute('aria-label', 'Vídeo de apresentação da Nature Force');
 
-      video.src = VIDEOS[0];
-
-      // Quando um vídeo termina, alterna para o próximo (loop contínuo)
-      video.addEventListener('ended', function() {
-        currentIndex = (currentIndex + 1) % VIDEOS.length;
-        video.src = VIDEOS[currentIndex];
-        video.play().catch(function() {
-          // Autoplay em loop com interação prévia é permitido
-        });
-      });
+      // Define a fonte do vídeo
+      video.src = VIDEO_SRC;
 
       // Substitui o poster pelo player
       videoWrap.innerHTML = '';
       videoWrap.appendChild(video);
 
-      video.play().catch(function() {
-        // Controles nativos disponíveis
-      });
+      // O vídeo já começa a tocar assim que é inserido
+      video.onloadeddata = function() {
+        // Já está pronto para tocar (autoplay já foi disparado)
+      };
     });
   }
   /* ========== WHATSAPP FLOAT ========== */
