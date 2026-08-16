@@ -394,6 +394,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  /* ========== VÍDEO NATURE FORCE (loop contínuo) ==========
+     Reproduz img/vid.mp4 e img/vid1.mp4 em loop alternado.
+     O MP4 só é carregado quando o usuário clica no play. */
+  function initVideo() {
+    var posterBtn = document.getElementById('nfVideoPoster');
+    var videoWrap = document.getElementById('nfVideo');
+    if (!posterBtn || !videoWrap) return;
+
+    var VIDEOS = ['img/vid.mp4', 'img/vid1.mp4'];
+    var currentIndex = 0;
+
+    posterBtn.addEventListener('click', function() {
+      if (videoWrap.querySelector('video')) return;
+
+      // Cria o <video> dinamicamente (performance: carrega só no clique)
+      var video = document.createElement('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.loop = false; // playlist manual (alterna entre os dois vídeos)
+      video.preload = 'auto';
+      video.setAttribute('aria-label', 'Vídeo de apresentação da Nature Force');
+
+      video.src = VIDEOS[0];
+
+      // Quando um vídeo termina, alterna para o próximo (loop contínuo)
+      video.addEventListener('ended', function() {
+        currentIndex = (currentIndex + 1) % VIDEOS.length;
+        video.src = VIDEOS[currentIndex];
+        video.play().catch(function() {
+          // Autoplay em loop com interação prévia é permitido
+        });
+      });
+
+      // Substitui o poster pelo player
+      videoWrap.innerHTML = '';
+      videoWrap.appendChild(video);
+
+      video.play().catch(function() {
+        // Controles nativos disponíveis
+      });
+    });
+  }
   /* ========== WHATSAPP FLOAT ========== */
   function initWhatsApp() {
     var floatBtn = document.getElementById('floatWhatsApp');
@@ -432,6 +474,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initAnimations();
   initSimulator();
   initFaq();
+  initVideo();
   initWhatsApp();
   initButtonFeedback();
 });

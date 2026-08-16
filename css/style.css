@@ -1161,6 +1161,102 @@ summary:focus-visible {
   line-height: var(--lh-normal);
 }
 
+/* ---------- Vídeo Nature Force (integrado à info-row) ----------
+   Mobile-first: poster + play, 16:9, carregamento sob demanda */
+.nf-video {
+  margin-top: 24px;
+}
+
+.nf-video-poster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(30, 169, 106, 0.15) 0%, transparent 60%),
+    rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition-base);
+}
+
+.nf-video-poster:hover {
+  border-color: rgba(186, 242, 95, 0.35);
+  transform: translateY(-2px);
+}
+
+.nf-video-poster:focus-visible {
+  outline: 2px solid var(--color-brand-light);
+  outline-offset: 2px;
+}
+
+.nf-video-poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.nf-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(186, 242, 95, 0.9);
+  color: var(--color-brand-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: var(--transition-base);
+}
+
+.nf-video-poster:hover .nf-video-play {
+  background: var(--color-brand-light);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.nf-video-play svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px;
+}
+
+.nf-video-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(7, 42, 50, 0.75);
+  backdrop-filter: blur(6px);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Estado de reprodução: substitui o poster pelo <video> */
+.nf-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  object-fit: cover;
+}
+
 /* Lista de passos (como funciona) — etapa compacta 01 → 02 → 03 */
 .steps-list {
   display: flex;
