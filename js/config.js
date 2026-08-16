@@ -9,14 +9,14 @@ const NATURE_CONFIG = {
     descricao:
       'Energia solar por assinatura. Economia na sua conta de energia, sem placas e sem obras.',
     email: 'natureforceenergiasolar@gmail.com',
-    telefone: '(81) 98660-0664',
+    telefone: '(81) 99660-0664',
     endereco: 'Endereço da sede da Nature Force'
   },
 
   whatsapp: {
-    numero: '5581986600664',
+    numero: '5581996600664',
     mensagemPadrao:
-      'Olá! Gostaria de saber como funciona a economia de energia por assinatura da Nature Force.'
+      'Olá! Vim pelo site da Nature Force e gostaria de saber mais sobre as soluções disponíveis.'
   },
 
   redesSociais: {

@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var NATURE_CONFIG = window.NATURE_CONFIG || {
     whatsapp: {
-      numero: '5500000000000',
-      mensagemPadrao: 'Olá! Gostaria de saber como funciona a economia de energia por assinatura da Nature Force.'
+      numero: '5581996600664',
+      mensagemPadrao: 'Olá! Vim pelo site da Nature Force e gostaria de saber mais sobre as soluções disponíveis.'
     },
     simulador: {
       percentualEconomia: 20
@@ -277,7 +277,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       if (simCta) {
-        var mensagem = 'Olá! Fiz uma simulação com conta de R$ ' + formatBRL(valor) + ' e gostaria de saber mais sobre a economia.';
+        var mensagem = valor > 0
+          ? 'Olá! Vim pelo site da Nature Force e gostaria de saber mais sobre as soluções disponíveis. Fiz uma simulação com conta de R$ ' + formatBRL(valor) + '.'
+          : NATURE_CONFIG.whatsapp.mensagemPadrao;
         simCta.href = 'https://wa.me/' + NATURE_CONFIG.whatsapp.numero + '?text=' + encodeURIComponent(mensagem);
       }
 
