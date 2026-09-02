@@ -402,6 +402,31 @@ summary:focus-visible {
   font-size: 0.82rem;
 }
 
+/* ---------- Botão Área do Cliente (header) ---------- */
+.nav-client-btn {
+  padding: 9px 18px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.nav-client-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.site-header.scrolled .nav-client-btn {
+  background: transparent;
+  border-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+.site-header.scrolled .nav-client-btn:hover {
+  background: rgba(30, 169, 106, 0.05);
+  border-color: var(--color-brand-medium);
+  color: var(--color-brand-dark);
+}
+
 .menu-toggle,
 .menu-close {
   display: none;
@@ -1637,6 +1662,26 @@ summary:focus-visible {
   .nav-cta {
     width: 100%;
     justify-content: center;
+  }
+
+  .nav-client-item {
+    margin-top: 8px;
+  }
+
+  .nav-links .nav-client-btn {
+    display: flex;
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: var(--radius-md);
+    border-color: var(--color-gray-200);
+    background: var(--color-white);
+    color: var(--color-brand-dark);
+  }
+
+  .nav-links .nav-client-btn:hover {
+    background: rgba(30, 169, 106, 0.04);
+    border-color: var(--color-brand-medium);
+    padding-left: 18px;
   }
 
   .menu-close {
