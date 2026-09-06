@@ -2096,3 +2096,39 @@ html.fx .footer-bottom.fx-in { opacity: 1; }
   .hero-scroll-cue { display: none; }
   .btn-primary::after { display: none; }
 }
+/* ---------- Hero: VIDEO SCROLL-DRIVEN (capa visual principal) ----------
+   O <video> fica entre a img (fallback) e o overlay.
+   Desktop: opacidade 0 ate decodificar e receber .ready.
+   Mobile: ambiente (loop) ja visivel; reduced-motion: estatico. */
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.hero-bg-video.ready {
+  opacity: 1;
+}
+
+html.fx .hero-bg-video { will-change: transform; }
+
+/* Overlay sempre acima do video (legibilidade do conteudo) */
+.hero-overlay {
+  z-index: 1;
+}
+
+/* Mobile / tablet: loop ambiente visivel mesmo antes de .ready */
+@media (max-width: 767px) {
+  .hero-bg-video { opacity: 1; }
+}
+
+/* Acessibilidade: prefer motion off -> banner estatico (img) */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-video { display: none; }
+}
