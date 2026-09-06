@@ -1867,3 +1867,232 @@ summary:focus-visible {
 /* ==========================================================================
    FIM DO ARQUIVO CSS
    ========================================================================== */
+/* ==========================================================================
+   NATURE FORCE - UPGRADE VISUAL PREMIUM (camada cinematografica)
+   Adicionado APOS todo o CSS original - nao modifica nem remove regras acima.
+   Anima apenas transform/opacity no scroll (blur so no load do Hero/desktop).
+   ========================================================================== */
+
+/* ---------- Detalhes premium ---------- */
+::selection {
+  background: rgba(186, 242, 95, 0.85);
+  color: var(--color-brand-dark);
+}
+
+.hero h1,
+.section-head h2,
+.info-col h2,
+.sim-step-head h3,
+.sim-result-head h3,
+.faq-item summary,
+.footer-col h4,
+.hero-stat-value,
+.sim-result-value {
+  font-family: "Manrope", "Inter", sans-serif;
+}
+
+/* ---------- Barra de progresso do scroll ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--color-brand-dark), var(--color-brand-medium) 55%, var(--color-brand-light));
+  box-shadow: 0 0 10px rgba(30, 169, 106, 0.55);
+}
+
+/* ---------- Header refinado ---------- */
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* ---------- Hero - entrada cinematografica ---------- */
+.hero h1 {
+  text-wrap: balance;
+}
+
+.hero-content > .reveal-on-load {
+  opacity: 0;
+  animation: hero-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-content > .reveal-on-load:nth-child(2) { animation-delay: 0.16s; }
+.hero-content > .reveal-on-load:nth-child(3) { animation-delay: 0.32s; }
+.hero-content > .reveal-on-load:nth-child(4) { animation-delay: 0.48s; }
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Profundidade atras do titulo */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 62%, rgba(30, 169, 106, 0.16), transparent 62%);
+}
+
+html.fx .hero-bg-img { will-change: transform; }
+html.fx .hero-content { will-change: transform, opacity; }
+
+/* Indicador de scroll */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: cue-float 2.6s ease-in-out infinite;
+}
+
+.hero-scroll-cue::before {
+  content: "";
+  width: 1px;
+  height: 44px;
+  opacity: 0.6;
+  background: linear-gradient(to bottom, transparent, currentColor);
+}
+
+.hero-scroll-cue:hover { color: var(--color-brand-light); }
+
+@keyframes cue-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ---------- Botoes - microinteracoes premium ---------- */
+.btn-primary { position: relative; overflow: hidden; }
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-primary:hover::after { left: 135%; }
+
+.btn-arrow svg { transition: transform 0.3s var(--easing); }
+.btn-arrow:hover svg[data-lucide="arrow-right"] { transform: translateX(4px); }
+.btn-arrow:hover svg[data-lucide="arrow-left"] { transform: translateX(-4px); }
+
+.hero-actions .btn-primary {
+  box-shadow: 0 12px 32px rgba(186, 242, 95, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Simulador - entrada em escala + transicoes refinadas ---------- */
+html.fx .sim-card:not(.fx-in) {
+  opacity: var(--fx-p, 0);
+  transform: translate3d(0, calc((1 - var(--fx-p, 0)) * 18px), 0) scale(var(--fx-scale, 0.94));
+  will-change: transform;
+}
+html.fx .sim-card.fx-in { opacity: 1; }
+/* ---------- FAQ - stagger + abertura suave ---------- */
+html.fx .faq-item:not(.fx-in) {
+  opacity: var(--fx-p, 0);
+  transform: translate3d(0, calc((1 - var(--fx-p, 0)) * 28px), 0);
+  transition: none !important;
+}
+html.fx .faq-item.fx-in { opacity: 1; }
+
+.faq-item[open] .faq-answer { animation: faq-open 0.42s var(--easing); }
+
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Info row - revelacao em cascata (scroll-driven) ---------- */
+html.fx .benefit-list > li:not(.fx-in),
+html.fx .steps-list > li:not(.fx-in) {
+  opacity: var(--fx-p, 0);
+  transform: translate3d(0, calc((1 - var(--fx-p, 0)) * 24px), 0);
+  transition: none !important;
+}
+html.fx .benefit-list > li.fx-in,
+html.fx .steps-list > li.fx-in { opacity: 1; }
+
+.nf-video.reveal {
+  transform: translateY(32px) scale(0.96);
+  transition-duration: 0.9s;
+}
+.nf-video.reveal.visible { transform: translateY(0) scale(1); }
+
+/* ---------- Footer ---------- */
+html.fx .footer-top:not(.fx-in),
+html.fx .footer-bottom:not(.fx-in) {
+  opacity: var(--fx-p, 0);
+  transform: translate3d(0, calc((1 - var(--fx-p, 0)) * 26px), 0);
+}
+html.fx .footer-top.fx-in,
+html.fx .footer-bottom.fx-in { opacity: 1; }
+
+/* ---------- Mobile / tablet: fluidez em primeiro lugar ---------- */
+@media (max-width: 767px) {
+  .hero-content > .reveal-on-load { animation-name: fade-up; }
+  .hero-scroll-cue { bottom: 16px; font-size: 0.56rem; gap: 8px; }
+  .hero-scroll-cue::before { height: 32px; }
+}
+
+/* ---------- Acessibilidade: prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001s !important;
+  }
+
+  .reveal,
+  .reveal-on-load,
+  html.fx .benefit-list > li,
+  html.fx .steps-list > li,
+  html.fx .faq-item,
+  html.fx .footer-top,
+  html.fx .footer-bottom {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-scroll-cue { display: none; }
+  .btn-primary::after { display: none; }
+}
