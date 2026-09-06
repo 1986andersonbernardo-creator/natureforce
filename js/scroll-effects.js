@@ -27,14 +27,13 @@
   /* ---------- 1. Barra de progresso global ---------- */
   var progressBar = document.getElementById('scrollProgressBar');
 
-  /* ---------- 2. Hero — parallax cinematográfico + vídeo scroll-driven ---------- */
+  /* ---------- 2. Hero — parallax cinematográfico + vídeo autoplay ---------- */
   var hero = document.querySelector('.hero');
   var heroBg = document.querySelector('.hero-bg-img');
   var heroContent = document.querySelector('.hero-content');
   var heroOverlay = document.querySelector('.hero-overlay');
   var heroVideo = document.getElementById('heroVideo');
   var heroVideoReady = false;
-  var heroVideoLast = -1;
   var heroVideoDuration = 0;
 
   /* ---------- 3. Elementos dirigidos pelo scroll ---------- */
@@ -82,10 +81,9 @@
     }
   }
 
-  /* ---------- VÍDEO HERO — scroll-driven (desktop) / ambiente (mobile) ----------
-     Desktop: el scroll controla video.currentTime (0 → 50% duração → último frame).
-     Mobile/tablet: alternativa elegante — loop ambiente silencioso (sin frame-a-frame).
-     prefers-reduced-motion / fallback: permanece la img original. */
+  /* ---------- VÍDEO HERO — autoplay loop (background) + acabamento cinematográfico ----------
+     Vídeo roda sozinho em loop (todos os dispositivos). Scroll aplica apenas
+     parallax/zoom sutis. prefers-reduced-motion / fallback: permanece a img original. */
   function initHeroVideo() {
     if (!heroVideo) return;
 
@@ -93,21 +91,19 @@
       heroVideoDuration = heroVideo.duration || 0;
       heroVideoReady = true;
       heroVideo.classList.add('ready');
-      update();
     });
 
-    if (isSmall) {
-      try {
-        heroVideo.muted = true;
-        heroVideo.loop = true;
-        heroVideo.playsInline = true;
-        var pr = heroVideo.play();
-        if (pr && typeof pr.catch === 'function') {
-          pr.catch(function () {});
-        }
-      } catch (e) {
-        // Se não pode tocar, permanece a img como fallback.
+    // Autoplay em loop como background (todos os dispositivos)
+    try {
+      heroVideo.muted = true;
+      heroVideo.loop = true;
+      heroVideo.playsInline = true;
+      var pr = heroVideo.play();
+      if (pr && typeof pr.catch === 'function') {
+        pr.catch(function () {});
       }
+    } catch (e) {
+      // Se não pode tocar, permanece a img como fallback.
     }
   }
 
@@ -138,15 +134,9 @@
           heroOverlay.style.opacity = String(clamp01(1 - pHero * 0.45));
         }
 
-        /* Vídeo scroll-driven: pVideo 0 → início, 1 → último frame */
-        if (heroVideo && heroVideoReady && !isSmall && heroVideoDuration > 0) {
+        /* Vídeo em autoplay: parallax + zoom sutis como acabamento cinematográfico */
+        if (heroVideo && heroVideoReady) {
           var pVideo = clamp01(-rect.top / (rect.height * 0.85));
-          var target = pVideo * heroVideoDuration;
-          if (Math.abs(target - heroVideoLast) >= Math.max(0.02, heroVideoDuration * 0.004)) {
-            heroVideo.currentTime = target;
-            heroVideoLast = target;
-          }
-          /* Efecto cinematográfico sutil: parallax + zoom controlado por progresso */
           heroVideo.style.transform =
             'translate3d(0, ' + Math.round(pHero * 28 * k) + 'px, 0) scale(' +
             (1.05 + 0.05 * pVideo).toFixed(3) + ')';
